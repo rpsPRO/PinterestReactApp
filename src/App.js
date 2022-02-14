@@ -1,11 +1,9 @@
-
 import './App.css';
+import Inicio from './components/Inicio';
 
 function App() {
   return (
-    <div>
-        <h1>Aplicación React Rubén</h1>
-    </div>
+    <Inicio/>
   );
 }
 

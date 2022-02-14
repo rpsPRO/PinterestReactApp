@@ -1,0 +1,6 @@
+h1 {
+    border: 2px solid black;
+    border-radius: 1em;
+    padding: 0.2em;
+    display: inline-block;
+}

@@ -8,39 +8,25 @@ import { getAnalytics } from "firebase/analytics";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyASjVbUbIt5ECeNYnmTK3rP5nk5FHnIN54",
-  authDomain: "react-pinterest-2b240.firebaseapp.com",
-  projectId: "react-pinterest-2b240",
-  storageBucket: "react-pinterest-2b240.appspot.com",
-  messagingSenderId: "64166775944",
-  appId: "1:64166775944:web:ea4fd5218024274e29233d",
-  measurementId: "G-4JH6CW8QJK"
+  apiKey: "AIzaSyBRapt3z6aduiDEl0CPaxpb7E_HJEFrDNg",
+  authDomain: "pinterestreactweb.firebaseapp.com",
+  projectId: "pinterestreactweb",
+  storageBucket: "pinterestreactweb.appspot.com",
+  messagingSenderId: "779036945027",
+  appId: "1:779036945027:web:e4f1264a145b20f42609b6",
+  measurementId: "G-0L39PZ1LK5"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-const auth = getAuth();
-createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in
-    const user = userCredential.user;
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // ..
-  });
+export const auth = getAuth();
 
-signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in
-    const user = userCredential.user;
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-  });
+const register = (email, password) => {
+  return createUserWithEmailAndPassword (auth, email, password);
+}
+
+const login = (email, password) => {
+  return signInWithEmailAndPassword(auth, email, password);
+}

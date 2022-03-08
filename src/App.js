@@ -1,9 +1,12 @@
 import './App.css';
-import Inicio from './components/Inicio';
+import { AuthProvider } from './auth/AuthProvider';
+import MainRouter from './routers/MainRouter';
 
 function App() {
   return (
-    <Inicio/>
+    <AuthProvider>
+      <MainRouter/>
+    </AuthProvider>
   );
 }
 

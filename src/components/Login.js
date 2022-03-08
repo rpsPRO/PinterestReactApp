@@ -9,8 +9,31 @@ import {
 import { Box } from "@mui/system";
 import { Link as RouterLink } from "react-router-dom";
 import React from "react";
+import { useContext } from 'react';
+import { AuthContext } from "../auth/AuthProvider";
+import { login } from '../firebase/firebase';
 
 export const Login = () => {
+
+  const { setUser } = useContext(AuthContext);
+
+  const handleSubmit = (event) => {
+
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+
+    login(data.get('email'), data.get('password')).then(
+      ( userCredentials )=> {
+         setUser(userCredentials.user);
+      }
+    ).catch(
+      (err)=> {
+        console.log(err);
+      }
+    );
+
+  };
+
   return (
     <Container
       sx={{
@@ -77,6 +100,7 @@ export const Login = () => {
           ¿Olvidaste tu contraseña?
         </Link>
         <Button
+          type="submit"
           style={{
             width: "70%",
             borderRadius: 35,
@@ -131,7 +155,7 @@ export const Login = () => {
         <Link
           component={RouterLink}
           underline="none"
-          to="/registro"
+          to="/register"
           variant="body2"
           marginBottom={"20px"}
           sx={{ color: "black", fontSize: "1.5em" }}

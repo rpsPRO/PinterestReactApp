@@ -1,5 +1,11 @@
 // Import the functions you need from the SDKs you need
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
+import { getAuth,
+   createUserWithEmailAndPassword,
+    signInWithEmailAndPassword, 
+    signOut, 
+    updateProfile, 
+    sendPasswordResetEmail
+  } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -23,10 +29,22 @@ const analytics = getAnalytics(app);
 
 export const auth = getAuth();
 
-const register = (email, password) => {
+export const register = (email, password) => {
   return createUserWithEmailAndPassword (auth, email, password);
 }
 
-const login = (email, password) => {
+export const updateName = (userData) => {
+  return updateProfile(auth.currentUser, userData);
+}
+
+export const login = (email, password) => {
   return signInWithEmailAndPassword(auth, email, password);
+}
+
+export const resetPassword = (email) => {
+  return sendPasswordResetEmail(auth, email);
+}
+
+export const logout = () => {
+  return signOut(auth);
 }

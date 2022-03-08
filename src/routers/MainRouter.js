@@ -15,7 +15,7 @@ const MainRouter = () => {
             <Route path="/frontpage" element={<PublicRoute><Inicio/></PublicRoute>}/>
             <Route path="/login" element={<PublicRoute><Login/></PublicRoute>}/>
             <Route path="/reset" element={<PublicRoute><Reset/></PublicRoute>}/>
-            <Route path="/registro" element={<PublicRoute><Register/></PublicRoute>}/>
+            <Route path="/register" element={<PublicRoute><Register/></PublicRoute>}/>
             
             <Route path="/" element={<PrivateRoute><Home/></PrivateRoute>}>
 

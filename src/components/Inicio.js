@@ -6,7 +6,7 @@ import BarraInicio from "./BarraInicio";
 import Slideshow from './Slideshow';
 
 function Inicio() {
- 
+
   return (
     <div>
       <Container maxWidth="xl" bgcolor="#FFF5EE">

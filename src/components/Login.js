@@ -51,6 +51,8 @@ export const Login = () => {
       }}
     >
       <Box
+        component="form"
+        onSubmit={handleSubmit}
         margin="100px"
         fontFamily={"BlinkMacSystemFont"}
         border="1px solid black"

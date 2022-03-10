@@ -11,7 +11,7 @@ import { Link as RouterLink } from "react-router-dom";
 import React from "react";
 import { useContext } from 'react';
 import { AuthContext } from "../auth/AuthProvider";
-import { login } from '../firebase/firebase';
+import { login, singInGoogle, singInFacebook } from '../firebase/firebase';
 
 export const Login = () => {
 
@@ -33,6 +33,14 @@ export const Login = () => {
     );
 
   };
+
+  const handlerSingInFacebook = () => {
+    singInFacebook();
+  }
+
+  const handlerSingInGoogle = () => {
+    singInGoogle();
+  }
 
   return (
     <Container
@@ -125,6 +133,7 @@ export const Login = () => {
           o
         </Typography>
         <Button
+        onClick={handlerSingInFacebook}
           style={{
             width: "70%",
             borderRadius: 35,
@@ -139,6 +148,7 @@ export const Login = () => {
           Iniciar sesión con Facebook
         </Button>
         <Button
+          onClick={handlerSingInGoogle}
           style={{
             width: "70%",
             borderRadius: 35,

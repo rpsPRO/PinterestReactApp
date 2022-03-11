@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useContext } from 'react';
 import { AuthContext } from "../auth/AuthProvider";
 import {
@@ -16,7 +16,9 @@ import { register, updateName } from '../firebase/firebase';
 const Register = () => {
 
   const { setUser } = useContext(AuthContext);
-
+  const [password, setPassword] = useState(" ");
+  const [errorPassword, setErrorPassword] = useState(false);
+ 
   const handleSubmit = (event) => {
 
     event.preventDefault();
@@ -112,6 +114,7 @@ const Register = () => {
           margin="normal"
           required
           sx={{ width: "70%" }}
+          type="email"
           id="email"
           label="Correo electrónico"
           name="email"
@@ -121,13 +124,27 @@ const Register = () => {
         <TextField
           margin="normal"
           required
+          onChange={(e) => {
+            if(password.length < 5){
+              console.log("menos que 6 --> "+password);
+              setPassword(e.target.value);
+              setErrorPassword(true);
+            } else {
+              console.log("más que 6 --> "+password);
+              setPassword(e.target.value);
+              setErrorPassword(false);
+            }
+          }}
           sx={{ width: "70%" }}
           name="password"
           label="Contraseña"
           type="password"
-          id="password"
+          error= {errorPassword}
+          id="outlined-error-helper-text"
           autoComplete="current-password"
+          
         />
+
         <Link
           component={RouterLink}
           underline="hover"

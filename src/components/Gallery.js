@@ -73,7 +73,7 @@ export const Gallery = () => {
                   <Typography gutterBottom variant="h5" component="h2">
                     {post.titulo}
                   </Typography>
-                  <Typography>{post.description}</Typography>
+                  <Typography>{post.descripcion}</Typography>
                 </CardContent>
                 <CardActions>
                   <Box sx={{ flexGrow: 1 }}></Box>

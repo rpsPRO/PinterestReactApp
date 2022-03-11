@@ -1,7 +1,20 @@
 // Import the functions you need from the SDKs you need
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
+import { getAuth,
+   createUserWithEmailAndPassword,
+    signInWithEmailAndPassword, 
+    signOut, 
+    updateProfile, 
+    sendPasswordResetEmail,
+    signInWithPopup,
+    GoogleAuthProvider,
+    FacebookAuthProvider 
+  } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+
+const providerGoogle = new GoogleAuthProvider();
+const providerFacebook = new FacebookAuthProvider();
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -21,26 +34,73 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-const auth = getAuth();
-createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in
-    const user = userCredential.user;
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // ..
-  });
+export const auth = getAuth();
 
-signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in
-    const user = userCredential.user;
+export const register = (email, password) => {
+  return createUserWithEmailAndPassword (auth, email, password);
+}
+
+export const updateName = (userData) => {
+  return updateProfile(auth.currentUser, userData);
+}
+
+export const login = (email, password) => {
+  return signInWithEmailAndPassword(auth, email, password);
+}
+
+export const resetPassword = (email) => {
+  return sendPasswordResetEmail(auth, email);
+}
+
+export const logout = () => {
+  return signOut(auth);
+}
+
+export const singInGoogle = () => {
+  signInWithPopup(auth, providerGoogle)
+  .then((result) => {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    // The signed-in user info.
+    const user = result.user;
+    // ...
+  }).catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.email;
+    // The AuthCredential type that was used.
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    // ...
+  });
+}
+
+export const singInFacebook = () => {
+  console.log("Sign in Facebook");
+  signInWithPopup(auth, providerFacebook)
+  .then((result) => {
+    // The signed-in user info.
+    const user = result.user;
+console.log("Estoy en el then");
+    // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+    const credential = FacebookAuthProvider.credentialFromResult(result);
+    const accessToken = credential.accessToken;
+    console.log(accessToken);
     // ...
   })
   .catch((error) => {
+    // Handle Errors here.
     const errorCode = error.code;
     const errorMessage = error.message;
+    console.log(errorMessage);
+    // The email of the user's account used.
+    const email = error.email;
+    // The AuthCredential type that was used.
+    const credential = FacebookAuthProvider.credentialFromError(error);
+    console.log("Estoy en el catch");
+    // ...
   });
+}
+

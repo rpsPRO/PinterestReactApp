@@ -1,11 +1,12 @@
-
 import './App.css';
+import { AuthProvider } from './auth/AuthProvider';
+import MainRouter from './routers/MainRouter';
 
 function App() {
   return (
-    <div>
-        <h1>Aplicación React Rubén</h1>
-    </div>
+    <AuthProvider>
+      <MainRouter/>
+    </AuthProvider>
   );
 }
 
